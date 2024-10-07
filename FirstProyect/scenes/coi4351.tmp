@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://dcxbi11xa3j31"]
+
+[ext_resource type="Script" path="res://scripts/coin.gd" id="1_0f450"]
+[ext_resource type="Texture2D" uid="uid://c7h01w04sscpo" path="res://assets/kenney_pixel-platformer-food-expansion/Tiles/tile_0014.png" id="1_5m0vk"]
+
+[sub_resource type="Animation" id="Animation_n14gu"]
+resource_name = "Rotation"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.1, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7ev71"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_62mqr"]
+_data = {
+"RESET": SubResource("Animation_7ev71"),
+"Rotation": SubResource("Animation_n14gu")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u6drh"]
+radius = 7.0
+
+[node name="Coin" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_0f450")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_5m0vk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_62mqr")
+}
+autoplay = "Rotation"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_u6drh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
