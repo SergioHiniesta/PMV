@@ -13,12 +13,25 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var marker_2d = $Marker2D
 
 func _physics_process(delta):
-	# Instancio la bala
+	var direction = Input.get_axis("move_left", "move_right")
+	# Instancio la bala cuando pulso el botón de disparar
 	if Input.is_action_just_pressed("shoot"):
 		var bulletTemp = bullet.instantiate()
-		bulletTemp.direction = 1
-		bulletTemp.global_position = marker_2d.global_position
+		# TODO flip_h del sprite de la bala
+		var bulletSprite = bulletTemp.get_node("Sprite2D")
+		# Ajusto la posicion del proyectil con un marker
+		bulletTemp.position = marker_2d.position
+		
+		# Ajusto la direccion del proyectil en funcion de hacia donde mira el pj
+		if animated_sprite.flip_h == false:
+			bulletTemp.direction = Vector2(1 , 0)
+			#bulletSprite.flip_h = false
+		elif animated_sprite.flip_h == true:
+			bulletTemp.direction = Vector2(-1 , 0)
+			#bulletSprite.flip_h = true
+			
 		add_child(bulletTemp)
+		
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -29,7 +42,6 @@ func _physics_process(delta):
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("move_left", "move_right")
 	
 	#Flip de sprite
 	if direction > 0:
