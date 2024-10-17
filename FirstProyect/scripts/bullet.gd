@@ -15,3 +15,5 @@ func _process(delta):
 	velocity.y += gravity * delta
 	position += velocity * delta
 
+func _on_area_2d_body_entered(body):
+	queue_free()
