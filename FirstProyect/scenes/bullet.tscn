@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqcvvcv8musjf"]
+
+[ext_resource type="Texture2D" uid="uid://ci1g81gqvkdm5" path="res://assets/kenney_pixel-platformer-food-expansion/Tiles/tile_0107.png" id="1_5yh3x"]
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_ag06i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_slby1"]
+size = Vector2(4.5, 4)
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_ag06i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_5yh3x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.25, 8.88178e-16)
+shape = SubResource("RectangleShape2D_slby1")

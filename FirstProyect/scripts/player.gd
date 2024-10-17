@@ -8,9 +8,17 @@ const JUMP_VELOCITY = -300.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var animated_sprite = $AnimatedSprite2D
-
+# Precargo la bala
+@onready var bullet = preload("res://scenes/bullet.tscn")
+@onready var marker_2d = $Marker2D
 
 func _physics_process(delta):
+	# Instancio la bala
+	if Input.is_action_just_pressed("shoot"):
+		var bulletTemp = bullet.instantiate()
+		bulletTemp.direction = 1
+		bulletTemp.global_position = marker_2d.global_position
+		add_child(bulletTemp)
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
