@@ -17,7 +17,6 @@ func _physics_process(delta):
 	# Instancio la bala cuando pulso el botón de disparar
 	if Input.is_action_just_pressed("shoot"):
 		var bulletTemp = bullet.instantiate()
-		# TODO flip_h del sprite de la bala
 		var bulletSprite = bulletTemp.get_node("Sprite2D")
 		# Ajusto la posicion del proyectil con un marker
 		bulletTemp.position = marker_2d.position
@@ -25,10 +24,10 @@ func _physics_process(delta):
 		# Ajusto la direccion del proyectil en funcion de hacia donde mira el pj
 		if animated_sprite.flip_h == false:
 			bulletTemp.direction = Vector2(1 , 0)
-			#bulletSprite.flip_h = false
+			bulletSprite.flip_v = false
 		elif animated_sprite.flip_h == true:
 			bulletTemp.direction = Vector2(-1 , 0)
-			#bulletSprite.flip_h = true
+			bulletSprite.flip_v = true
 			
 		add_child(bulletTemp)
 		

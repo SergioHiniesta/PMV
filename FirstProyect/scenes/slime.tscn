@@ -54,7 +54,9 @@ frame = 1
 frame_progress = 0.053288
 flip_h = true
 
-[node name="KillZone" parent="." instance=ExtResource("2_0533m")]
+[node name="KillZone" parent="." groups=["slime"] instance=ExtResource("2_0533m")]
+collision_layer = 7
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
 position = Vector2(0, 5)
@@ -67,3 +69,6 @@ target_position = Vector2(9, 0)
 [node name="RayCastLeft" type="RayCast2D" parent="."]
 position = Vector2(0, 5)
 target_position = Vector2(-9, 0)
+
+[connection signal="area_entered" from="KillZone" to="." method="_on_kill_zone_area_entered"]
+[connection signal="body_entered" from="KillZone" to="." method="_on_kill_zone_body_entered"]
