@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://ck1cscgr1mtew"]
+
+[ext_resource type="Script" path="res://scripts/projectile.gd" id="1_7m2ie"]
+[ext_resource type="Texture2D" uid="uid://bp6k4b5017ps" path="res://assets/kenney_pixel-platformer-food-expansion/Tilemap/tilemap_packed.png" id="1_u1ll0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qqpja"]
+size = Vector2(5, 5)
+
+[node name="projectile" type="RigidBody2D" groups=["projectile"]]
+script = ExtResource("1_7m2ie")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3.72529e-07, -3.72529e-07)
+scale = Vector2(0.333333, 0.333333)
+texture = ExtResource("1_u1ll0")
+region_enabled = true
+region_rect = Rect2(180, 54, 18, 18)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qqpja")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

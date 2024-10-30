@@ -71,4 +71,5 @@ position = Vector2(0, 5)
 target_position = Vector2(-9, 0)
 
 [connection signal="area_entered" from="KillZone" to="." method="_on_kill_zone_area_entered"]
+[connection signal="area_shape_entered" from="KillZone" to="." method="_on_kill_zone_area_shape_entered"]
 [connection signal="body_entered" from="KillZone" to="." method="_on_kill_zone_body_entered"]
