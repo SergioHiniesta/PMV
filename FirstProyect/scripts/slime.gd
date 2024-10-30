@@ -19,3 +19,10 @@ func _process(delta):
 		animated_sprite.flip_h = false
 		
 	position.x += direction * SPEED * delta
+
+
+
+func _on_kill_zone_body_entered(body):
+	if(body.is_in_group("projectile")):
+		queue_free()
+		body.queue_free()

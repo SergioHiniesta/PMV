@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1mq3seb5g13u"]
+
+[ext_resource type="FontFile" uid="uid://dg55dmtfxhrw8" path="res://assets/brackeys_platformer_assets/brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="1_g7484"]
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_ty33q"]
+
+[sub_resource type="Theme" id="Theme_1r1nx"]
+
+[sub_resource type="Theme" id="Theme_d3tq6"]
+default_font = ExtResource("1_g7484")
+default_font_size = 22
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ty33q")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 647.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 428.0
+offset_top = 396.0
+offset_right = 734.0
+offset_bottom = 479.0
+theme = SubResource("Theme_1r1nx")
+theme_override_constants/separation = 12
+
+[node name="Play" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_d3tq6")
+text = "PLAY"
+
+[node name="Exit" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_d3tq6")
+text = "EXIT"
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 345.0
+offset_top = 87.0
+offset_right = 815.0
+offset_bottom = 168.0
+theme_override_fonts/font = ExtResource("1_g7484")
+theme_override_font_sizes/font_size = 47
+text = "SUPERBREAD"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Panel/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
